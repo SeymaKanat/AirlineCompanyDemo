@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Overview all of company</title>
+</head>
+<body>
+<h1>Overview all of company</h1>
+<table>
+    <tr>
+        <th>companyId</th>
+        <th>companyName</th>
+    </tr>
+    <tr th:each="company : ${allCompanies}"> <!-- Burasi sadece companyleri listelemek icin
+        <td th:text="${company.companyId}"></td>
+        <td th:text="${company.companyName}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
