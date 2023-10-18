@@ -8,15 +8,20 @@
 <h1>Overview all of company</h1>
 <table>
     <tr>
-        <th>companyId</th>
-        <th>companyName</th>
-        <th>location</th>
+        <th>CompanyId</th>
+        <th>CompanyName</th>
+        <th>Location</th>
+        <th>Available Airplanes</th>
+        <th>Flight</th>
+
 
     </tr>
     <tr th:each="company : ${allCompanies}">
         <td th:text="${company.companyId}"></td>
         <td th:text="${company.companyName}"></td>
         <td th:text="${company.location}"></td>
+        <td th:text="${company.getNumberOfAvailableAirplanes()}"></td>
+        <td><a th:href="@{/airplane/new/{companyId}(companyId=${company.companyId})}">Flights of airplane</a></td>
     </tr>
 </table>
 
