@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a new company</title>
+</head>
+<body>
+
+<h1>Create a new company</h1>
+
+<form th:action="@{/company/new}" method="post" th:object="${company}" >
+    <table>
+        <tr>
+            <th>companyName</th>
+            <th>Location</th>
+
+        </tr>
+        <tr>
+            <td><input type="text" th:field="*{companyName}" /></td>
+            <td><input type="text" th:field="*{location}" /></td>
+        </tr>
+    </table>
+
+    <input type="submit" value="Save Company">
+</form>
+
+</body>
+</html>

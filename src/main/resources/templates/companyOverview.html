@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Overview all of company</title>
@@ -10,10 +10,13 @@
     <tr>
         <th>companyId</th>
         <th>companyName</th>
+        <th>location</th>
+
     </tr>
-    <tr th:each="company : ${allCompanies}"> <!-- Burasi sadece companyleri listelemek icin
+    <tr th:each="company : ${allCompanies}">
         <td th:text="${company.companyId}"></td>
         <td th:text="${company.companyName}"></td>
+        <td th:text="${company.location}"></td>
     </tr>
 </table>
 

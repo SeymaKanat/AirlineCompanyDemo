@@ -13,6 +13,7 @@ public class Company {
     @Id @GeneratedValue
     private Long  companyId;
     private String companyName;
+    private String location;
 
     public Long getCompanyId() {
         return companyId;
@@ -20,5 +21,21 @@ public class Company {
 
     public String getCompanyName() {
         return companyName;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
