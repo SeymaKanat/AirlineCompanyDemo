@@ -34,6 +34,37 @@ public class AirplaneController {
         return "redirect:/company/new";
     }
 
+    @GetMapping("/airplane/flight/{airplaneId}")
+    private String makeAirplaneUnavailable(@PathVariable("airplaneId") Long airplaneId){
+        Optional<Airplane> optionalAirplane = airplaneRepository.findById(airplaneId);
+
+        if(optionalAirplane.isEmpty()){
+            return "redirect:/company/overview";
+        }
+       Airplane airplane = optionalAirplane.get();
+       airplane.setAvailable(false);
+       airplaneRepository.save(airplane);
+
+       return String.format("redirect:/company/detail/%s", airplane.getCompany().getCompanyName());
+
+
+    }
+    @GetMapping("/airplane/return/{airplaneId}")
+    private String makeAirplaneAvailable(@PathVariable("airplaneId") Long airplaneId){
+        Optional<Airplane> optionalAirplane = airplaneRepository.findById(airplaneId);
+
+        if(optionalAirplane.isEmpty()){
+            return "redirect:/company/overview";
+        }
+        Airplane airplane = optionalAirplane.get();
+        airplane.setAvailable(true);
+        airplaneRepository.save(airplane);
+
+        return String.format("redirect:/company/detail/%s", airplane.getCompany().getCompanyName());
+
+
+    }
+
 
 
 }

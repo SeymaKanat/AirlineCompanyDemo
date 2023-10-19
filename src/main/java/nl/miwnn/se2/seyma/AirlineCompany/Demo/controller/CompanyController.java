@@ -37,12 +37,28 @@ public class CompanyController {
 
         return "companyForm";
     }
+
+
     @PostMapping("/company/new") //Save company butonu icin
     private String saveOrUpdateCompany(@ModelAttribute("company") Company companyToBeSaved, BindingResult result){
         if (!result.hasErrors()){
             companyRepository.save(companyToBeSaved);
         }
         return "redirect:/";
+    }
+
+    @GetMapping("/company/edit/{companyName}")
+    private String showEditCompantyForm(@PathVariable("companyName") String companyName, Model model){
+        Optional<Company> optionalCompany = companyRepository.findCompanyByCompanyName(companyName);
+
+
+        if (optionalCompany.isEmpty()){
+            return "redirect:/";
+        }
+        model.addAttribute("company", optionalCompany.get());
+
+        return "companyForm";
+
     }
 
     @GetMapping("/company/detail/{companyName}")

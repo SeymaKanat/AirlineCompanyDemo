@@ -23,7 +23,7 @@
     </tr>
 
 </table>
-
+<a th:href="@{/company/edit/{companyName}(companyName=${companyToBeShown.companyName})}">Edit</a>
 <a th:href="@{/company/overview}">Go to overview</a>
 
 <table>
@@ -34,7 +34,12 @@
 
      <tr th:each="airplane : ${companyToBeShown.airplanes}">
          <td th:text="${airplane.id}"></td>
-         <td th:text="${airplane.available}"></td>
+         <td th:if="${airplane.available}">
+            <a th:href="@{/airplane/flight/{airplaneId}(airplaneId=${airplane.id})}">Gone</a>
+         </td>
+         <td th:unless="${airplane.available}">
+             <a th:href="@{/airplane/return/{airplaneId}(airplaneId=${airplane.id})}">Back</a>
+         </td>
      </tr>
 
 </table>
