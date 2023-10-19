@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Details of a company</title>
+</head>
+<body>
+
+<h1>Details of a company: <span th:text="${companyToBeShown.companyName}"></span> </h1>
+
+<table>
+    <tr>
+        <td>Company Name</td>
+        <td th:text="${companyToBeShown.companyName}"></td>
+    </tr>
+    <tr >
+        <td>Location</td>
+        <td th:text="${companyToBeShown.location}"></td>
+    </tr>
+    <tr>
+        <td>Available airplanes</td>
+        <td th:text="${companyToBeShown.numberOfAvailableAirplanes}"></td>
+    </tr>
+
+</table>
+
+<a th:href="@{/company/overview}">Go to overview</a>
+
+<table>
+     <tr>
+         <th>airplaneId</th>
+         <th>availability</th>
+     </tr>
+
+     <tr th:each="airplane : ${companyToBeShown.airplanes}">
+         <td th:text="${airplane.id}"></td>
+         <td th:text="${airplane.available}"></td>
+     </tr>
+
+</table>
+
+</body>
+</html>

@@ -7,7 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 /**
  * @author Seyma Kanat <s.kanat@st.hanze.nl>
@@ -21,7 +24,7 @@ public class CompanyController {
         this.companyRepository = companyRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping({"/", "/company/overview"})
     private String showCompanyOverview(Model model) {
         model.addAttribute("allCompanies", companyRepository.findAll());
 
@@ -40,6 +43,18 @@ public class CompanyController {
             companyRepository.save(companyToBeSaved);
         }
         return "redirect:/";
+    }
+
+    @GetMapping("/company/detail/{companyName}")
+    private String showCompanyDetail(@PathVariable("companyName") String companyName, Model model){
+       Optional<Company> optionalCompany = companyRepository.findCompanyByCompanyName(companyName);
+
+       if(optionalCompany.isEmpty()){
+           return "redirect:/";
+       }
+       model.addAttribute("companyToBeShown", optionalCompany.get());
+
+       return "companyDetail";
     }
 
 

@@ -3,10 +3,7 @@ package nl.miwnn.se2.seyma.AirlineCompany.Demo.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -18,6 +15,7 @@ import java.util.List;
 public class Company {
     @Id @GeneratedValue
     private Long  companyId;
+    @Column(unique = true)
     private String companyName;
     private String location;
 
