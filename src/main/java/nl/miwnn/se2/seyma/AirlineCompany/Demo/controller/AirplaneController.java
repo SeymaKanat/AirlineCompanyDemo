@@ -8,6 +8,7 @@ import nl.miwnn.se2.seyma.AirlineCompany.Demo.repository.CompanyRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
 
@@ -17,12 +18,13 @@ import java.util.Optional;
  * Handle everthing  regarding airplanes
  */
 @Controller
+@RequestMapping("/airplane")
 @RequiredArgsConstructor     // Constructor yerine bunu ekledik
 public class AirplaneController {
     private final CompanyRepository companyRepository;
     private final AirplaneRepository airplaneRepository;
 
-@GetMapping("/airplane/new/{companyId}") //Burasi company olusturmak icin
+@GetMapping("/new/{companyId}") //Burasi company olusturmak icin
     private String createNewAirplane(@PathVariable("companyId") Long companyId){
         Optional<Company> companyOptional = companyRepository.findById(companyId);
 
@@ -34,7 +36,7 @@ public class AirplaneController {
         return "redirect:/company/new";
     }
 
-    @GetMapping("/airplane/flight/{airplaneId}")
+    @GetMapping("/flight/{airplaneId}")
     private String makeAirplaneUnavailable(@PathVariable("airplaneId") Long airplaneId){
         Optional<Airplane> optionalAirplane = airplaneRepository.findById(airplaneId);
 
@@ -49,7 +51,7 @@ public class AirplaneController {
 
 
     }
-    @GetMapping("/airplane/return/{airplaneId}")
+    @GetMapping("/return/{airplaneId}")
     private String makeAirplaneAvailable(@PathVariable("airplaneId") Long airplaneId){
         Optional<Airplane> optionalAirplane = airplaneRepository.findById(airplaneId);
 
