@@ -17,6 +17,7 @@
     </tr>
     <tr th:each="company : ${allCompanies}">
         <td> <a th:href="@{/company/detail/{companyName}(companyName=${company.companyName})}" th:text="${company.companyName}"></a></td>
+        <td th:text="${company.allEmployeesDisplayString}"></td>
         <td th:text="${company.location}"></td>
         <td th:text="${company.numberOfAvailableAirplanes}"></td>
         <td><a th:href="@{/airplane/new/{companyId}(companyId=${company.companyId})}">Flights of airplane</a></td>

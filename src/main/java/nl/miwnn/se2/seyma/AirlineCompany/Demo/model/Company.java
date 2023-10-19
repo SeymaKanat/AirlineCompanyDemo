@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Seyma Kanat <s.kanat@st.hanze.nl>
@@ -15,12 +16,18 @@ import java.util.List;
 public class Company {
     @Id @GeneratedValue
     private Long  companyId;
+
     @Column(unique = true)
     private String companyName;
+
+    @ManyToMany
+    private Set<Employee> employees;
+
+
     private String location;
 
     @OneToMany(mappedBy = "company")
-    private List<Airplane> airplanes;
+    private Set<Airplane> airplanes;
 
     public int getNumberOfAvailableAirplanes(){
         int count = 0;
@@ -31,6 +38,16 @@ public class Company {
             }
         }
         return count;
+    }
+
+    public  String getAllEmployeesDisplayString(){
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Employee employee : employees) {
+            stringBuilder.append(employee.getDisplayName()).append(",");
+        }
+        return stringBuilder.toString();
+
     }
 
 }

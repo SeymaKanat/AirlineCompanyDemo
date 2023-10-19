@@ -1,7 +1,9 @@
 package nl.miwnn.se2.seyma.AirlineCompany.Demo.controller;
 
+import lombok.RequiredArgsConstructor;
 import nl.miwnn.se2.seyma.AirlineCompany.Demo.model.Company;
 import nl.miwnn.se2.seyma.AirlineCompany.Demo.repository.CompanyRepository;
+import nl.miwnn.se2.seyma.AirlineCompany.Demo.repository.EmployeeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,12 +19,13 @@ import java.util.Optional;
  * Purpose of the program
  */
 @Controller
+@RequiredArgsConstructor
+
 public class CompanyController {
+    private  final EmployeeRepository employeeRepository;
     private final CompanyRepository companyRepository;
 
-    public CompanyController(CompanyRepository companyRepository) {
-        this.companyRepository = companyRepository;
-    }
+
 
     @GetMapping({"/", "/company/overview"})
     private String showCompanyOverview(Model model) {
@@ -34,6 +37,7 @@ public class CompanyController {
     @GetMapping("/company/new") //Burasi company olusturmak icin
     private String showCompanyForm(Model model) {
         model.addAttribute("company", new Company());
+        model.addAttribute("allEmployees", employeeRepository.findAll());
 
         return "companyForm";
     }

@@ -13,13 +13,25 @@
 
     <table>
         <tr>
-            <th>companyName</th>
-            <th>Location</th>
-
+            <td><label for="companyNameField">Company Name</label></td>
+            <td><label for="locationField"> Location </label></td>
+            <td><label for="employeeField"> Employees </label></td>
         </tr>
         <tr>
-            <td><input type="text" th:field="*{companyName}" /></td>
-            <td><input type="text" th:field="*{location}" /></td>
+            <td>
+                <input type="text" id="companyNameField" th:field="*{companyName}" />
+            </td>
+            <td>
+                <input type="text" id="locationField" th:field="*{location}" />
+            </td>
+            <td>
+                <select id="employeeField" th:field="*{employees}" multiple >
+                    <option th:each="employee : ${allEmployees}"
+                            th:value="${employee.employeeId}"
+                            th:text="${employee.displayName}">
+                    </option>
+                </select>
+            </td>
         </tr>
     </table>
 

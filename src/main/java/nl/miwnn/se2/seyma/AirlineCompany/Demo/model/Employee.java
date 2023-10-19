@@ -23,7 +23,7 @@ public class Employee {
     private String infixName;
     @Column(nullable = false) private String lastName;
 
-    public String getDisplayName(){
+    public String getDisplayName(){ //Display name
         String displayName = firstName;
 
         if(infixName != null && !infixName.equals("")){
@@ -36,6 +36,10 @@ public class Employee {
 
 
     }
+
+
+
+
 
 
 
