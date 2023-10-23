@@ -3,12 +3,16 @@ package nl.miwnn.se2.seyma.AirlineCompany.Demo.controller;
 import lombok.RequiredArgsConstructor;
 import net.datafaker.Faker;
 import net.datafaker.providers.base.Name;
+import nl.miwnn.se2.seyma.AirlineCompany.Demo.model.AirlineUser;
 import nl.miwnn.se2.seyma.AirlineCompany.Demo.model.Airplane;
 import nl.miwnn.se2.seyma.AirlineCompany.Demo.model.Company;
 import nl.miwnn.se2.seyma.AirlineCompany.Demo.model.Employee;
+import nl.miwnn.se2.seyma.AirlineCompany.Demo.repository.AirlineUserRepository;
 import nl.miwnn.se2.seyma.AirlineCompany.Demo.repository.AirplaneRepository;
 import nl.miwnn.se2.seyma.AirlineCompany.Demo.repository.CompanyRepository;
 import nl.miwnn.se2.seyma.AirlineCompany.Demo.repository.EmployeeRepository;
+import org.apache.tomcat.jni.Library;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -25,11 +29,20 @@ public class InitializeController {
     private final EmployeeRepository employeeRepository;
     private final CompanyRepository companyRepository;
     private final AirplaneRepository airplaneRepository;
+    private final AirlineUserRepository airlineUserRepository;
+    private  final PasswordEncoder passwordEncoder;
     @GetMapping("/initialize")
     private String initializeDB() {
         if (!companyRepository.findAll().isEmpty()) {
             return "redirect:/";
         }
+
+        AirlineUser adminUser = new AirlineUser();
+        adminUser.setUsername("admin");
+        adminUser.setPassword(passwordEncoder.encode("admin"));
+        System.err.println("Admin user created, please make sure to change the password");
+        airlineUserRepository.save(adminUser);
+
 
 //        Faker faker = new Faker(new Locale("nl"));
 //
