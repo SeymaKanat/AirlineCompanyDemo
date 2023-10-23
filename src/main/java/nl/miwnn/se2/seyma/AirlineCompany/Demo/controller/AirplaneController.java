@@ -33,7 +33,7 @@ public class AirplaneController {
             airplane.setCompany(companyOptional.get());
             airplaneRepository.save(airplane);
         }
-        return "redirect:/company/new";
+        return "redirect:/company/overview"; //TODO: Burasi hangi sayfada gosterilecegiyle ilgili
     }
 
     @GetMapping("/flight/{airplaneId}")

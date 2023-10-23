@@ -22,7 +22,7 @@ public class EmployeeController {
     private final EmployeeRepository employeeRepository;
 
     @GetMapping("/all")
-    protected String showAllEmployeesOverview(Model model) {
+    protected String showAEmployeesOverview(Model model) {
         model.addAttribute("allEmployees", employeeRepository.findAll());
         model.addAttribute("newEmployee", new Employee());
         return "employeeOverview";

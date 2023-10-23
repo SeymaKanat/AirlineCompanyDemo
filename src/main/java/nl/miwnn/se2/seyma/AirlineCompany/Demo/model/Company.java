@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,20 +15,32 @@ import java.util.Set;
 @Entity
 @Getter @Setter
 public class Company {
+    public Company(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public Company() {
+
+    }
+
     @Id @GeneratedValue
     private Long  companyId;
 
     @Column(unique = true)
     private String companyName;
 
-    @ManyToMany
-    private Set<Employee> employees;
-
-
     private String location;
+
+    @ManyToMany
+    private Set<Employee> employees = new HashSet<>();
+
 
     @OneToMany(mappedBy = "company")
     private Set<Airplane> airplanes;
+
+    public void  addEmployee(Employee employee){
+        employees.add(employee);
+    }
 
     public int getNumberOfAvailableAirplanes(){
         int count = 0;
@@ -40,14 +53,14 @@ public class Company {
         return count;
     }
 
-    public  String getAllEmployeesDisplayString(){
+    public String getAllEmployeesDisplayString() {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Employee employee : employees) {
-            stringBuilder.append(employee.getDisplayName()).append(",");
+            stringBuilder.append(employee.getDisplayName()).append(", ");
         }
-        return stringBuilder.toString();
 
+        return stringBuilder.toString();
     }
 
 }

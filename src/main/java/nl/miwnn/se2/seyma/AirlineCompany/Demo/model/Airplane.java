@@ -15,6 +15,15 @@ import javax.persistence.ManyToOne;
 @Entity
 @Getter @Setter
 public class Airplane {
+
+    public Airplane(Company company) {
+        this.company = company;
+    }
+
+    public Airplane() {
+
+    }
+
     @Id @GeneratedValue
     private Long id;
     private Boolean available = true;
