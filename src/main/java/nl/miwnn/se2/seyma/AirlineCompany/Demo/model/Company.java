@@ -35,7 +35,7 @@ public class Company {
     private Set<Employee> employees = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL) //company silinirse airplane de silinir.
     private Set<Airplane> airplanes;
 
     public void  addEmployee(Employee employee){

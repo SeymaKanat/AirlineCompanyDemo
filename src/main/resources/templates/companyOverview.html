@@ -2,28 +2,56 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Overview all of company</title>
-</head>
+    <head th:replace="fragments/general :: baseHeader(~{:: title})">
+        <title>Overview of all companies</title>
+    </head>
 <body>
-<h1>Overview all of company</h1>
-<table>
-    <tr>
-        <th>CompanyName</th>
-        <th>Employees</th>
-        <th>Location</th>
-        <th>Available Airplanes</th>
-        <th>Flight</th>
 
+<!--<h1>Overview of all companies</h1>-->
+<div th:replace="fragments/general :: navbar"></div>
 
-    </tr>
-    <tr th:each="company : ${allCompanies}">
-        <td> <a th:href="@{/company/detail/{companyName}(companyName=${company.companyName})}" th:text="${company.companyName}"></a></td>
-        <td th:text="${company.allEmployeesDisplayString}"></td>
-        <td th:text="${company.location}"></td>
-        <td th:text="${company.numberOfAvailableAirplanes}"></td>
-        <td><a th:href="@{/airplane/new/{companyId}(companyId=${company.companyId})}">Flights of airplane</a></td>
-    </tr>
-</table>
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>Company Name</th>-->
+<!--        <th>Employees</th>-->
+<!--        <th>Available Flights</th>-->
+<!--        <th>Flight</th>-->
+<!--    </tr>-->
+
+<!--    <tr th:each="company : ${allCompanies}">-->
+<!--        <td> <a th:href="@{/company/detail/{companyName}(companyName=${company.companyName})}" th:text="${company.companyName}"></a></td>-->
+<!--        <td th:text="${company.allEmployeesDisplayString}"></td>-->
+<!--        <td th:text="${company.location}"></td>-->
+<!--        <td th:text="${company.numberOfAvailableAirplanes}"></td>-->
+<!--        <td><a th:href="@{/airplane/new/{companyId}(companyId=${company.companyId})}">Flights of airplane</a></td>-->
+<!--    </tr>-->
+<!--</table>-->
+<div class="container">
+    <h1>Overview of all companies</h1>
+
+<!--    <a th:href="@{/company/new}">Add a Company</a>-->
+    <table>
+        <tr>
+            <th>Company Name</th>
+            <th>Employees</th>
+            <th>Location</th>
+            <th>Available Flights</th>
+            <th>Flight</th>
+        </tr>
+        <tr th:each="company : ${allCompanies}">
+            <td> <a th:href="@{/company/detail/{companyName}(companyName=${company.companyName})}" th:text="${company.companyName}"></a></td>
+            <td th:text="${company.allEmployeesDisplayString}"></td>
+            <td th:text="${company.location}"></td>
+            <td th:text="${company.numberOfAvailableAirplanes}"></td>
+            <td><a th:href="@{/airplane/new/{companyId}(companyId=${company.companyId})}">Flights of airplane</a></td>
+        </tr>
+    </table>
+
+    <a th:href="@{/company/new}">Add a Company</a>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
 
 </body>
 </html>

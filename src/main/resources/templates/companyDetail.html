@@ -6,47 +6,122 @@
 </head>
 <body>
 
-<h1>Details of a company: <span th:text="${companyToBeShown.companyName}"></span> </h1>
+<div th:replace="fragments/general :: navbar"></div>
 
-<table>
-    <tr>
-        <td>Company Name</td>
-        <td th:text="${companyToBeShown.companyName}"></td>
-    </tr>
-    <tr >
-        <td>Location</td>
-        <td th:text="${companyToBeShown.location}"></td>
-    </tr>
-    <tr >
-        <td>Employee</td>
-        <td th:text="${companyToBeShown.allEmployeesDisplayString}"></td>
-    </tr>
-    <tr>
-        <td>Available airplanes</td>
-        <td th:text="${companyToBeShown.numberOfAvailableAirplanes}"></td>
-    </tr>
+<div class="container">
+    <h1>Details of a company: <span th:text="${companyToBeShown.companyName}"></span> </h1>
 
-</table>
-<a th:href="@{/company/edit/{companyName}(companyName=${companyToBeShown.companyName})}">Edit</a>
-<a th:href="@{/company/overview}">Go to overview</a>
+    <table>
+        <tr>
+            <td>Company Name</td>
+            <td th:text="${companyToBeShown.companyName}"></td>
+        </tr>
+        <tr >
+            <td>Location</td>
+            <td th:text="${companyToBeShown.location}"></td>
+        </tr>
+        <tr >
+            <td>Employee</td>
+            <td th:text="${companyToBeShown.allEmployeesDisplayString}"></td>
+        </tr>
+        <tr>
+            <td>Available airplanes</td>
+            <td th:text="${companyToBeShown.numberOfAvailableAirplanes}"></td>
+        </tr>
 
-<table>
-     <tr>
-         <th>airplaneId</th>
-         <th>availability</th>
-     </tr>
+    </table>
 
-     <tr th:each="airplane : ${companyToBeShown.airplanes}">
-         <td th:text="${airplane.id}"></td>
-         <td th:if="${airplane.available}">
-            <a th:href="@{/airplane/flight/{airplaneId}(airplaneId=${airplane.id})}">Gone</a>
-         </td>
-         <td th:unless="${airplane.available}">
-             <a th:href="@{/airplane/return/{airplaneId}(airplaneId=${airplane.id})}">Back</a>
-         </td>
-     </tr>
+    <p>
+        <a th:href="@{/company/edit/{title}(title=${companyToBeShown.companyName})}">Edit</a>
+    </p>
 
-</table>
+    <p>
+        <a th:href="@{/company/delete/{title}(title=${companyToBeShown.companyName})}">Delete</a>
+    </p>
+
+    <p>
+        <a th:href="@{/company/overview}">Go to company overview</a>
+    </p>
+
+    <table>
+        <tr>
+            <th>airplaneId</th>
+            <th>availability</th>
+        </tr>
+        <tr th:each="airplane : ${companyToBeShown.airplanes}">
+            <td th:text="${airplane.id}"></td>
+            <td th:if="${airplane.available}">
+                <a th:href="@{/airplane/flight/{airplaneId}(airplaneId=${airplane.id})}">Gone</a>
+            </td>
+            <td th:unless="${airplane.available}">
+                <a th:href="@{/airplane/return/{airplaneId}(airplaneId=${airplane.id})}">Back</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
 
 </body>
 </html>
+
+<!--<h1>Details of a company: <span th:text="${companyToBeShown.companyName}"></span> </h1>-->
+
+<!--<table>-->
+<!--    <tr>-->
+<!--        <td>Company Name</td>-->
+<!--        <td th:text="${companyToBeShown.companyName}"></td>-->
+<!--    </tr>-->
+<!--    <tr >-->
+<!--        <td>Location</td>-->
+<!--        <td th:text="${companyToBeShown.location}"></td>-->
+<!--    </tr>-->
+<!--    <tr >-->
+<!--        <td>Employee</td>-->
+<!--        <td th:text="${companyToBeShown.allEmployeesDisplayString}"></td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td>Available airplanes</td>-->
+<!--        <td th:text="${companyToBeShown.numberOfAvailableAirplanes}"></td>-->
+<!--    </tr>-->
+
+
+<!--</table>-->
+
+<!--<p>-->
+<!--    <a th:href="@{/company/edit/{companyName}(companyName=${companyToBeShown.companyName})}">Edit</a>-->
+<!--</p>-->
+
+<!--<p>-->
+<!--    <a th:href="@{/company/delete/{companyName}(companyName=${companyToBeShown.companyName})}">Delete</a>-->
+<!--</p>-->
+
+<!--<p>-->
+<!--    <a th:href="@{/company/overview}">Go to company overview</a>-->
+<!--</p>-->
+
+<!--<table>-->
+
+<!--     <tr>-->
+<!--         <th>airplaneId</th>-->
+<!--         <th>availability</th>-->
+<!--     </tr>-->
+
+<!--     <tr th:each="airplane : ${companyToBeShown.airplanes}">-->
+<!--         <td th:text="${airplane.id}"></td>-->
+<!--         <td th:if="${airplane.available}">-->
+<!--            <a th:href="@{/airplane/flight/{airplaneId}(airplaneId=${airplane.id})}">Gone</a>-->
+<!--         </td>-->
+<!--         <td th:unless="${airplane.available}">-->
+<!--             <a th:href="@{/airplane/return/{airplaneId}(airplaneId=${airplane.id})}">Back</a>-->
+<!--         </td>-->
+<!--     </tr>-->
+
+<!--</table>-->
+
+<!--<div th:replace="fragments/general :: footer"></div>-->
+<!--<div th:replace="fragments/general :: bottomScripts"></div>-->
+
+<!--</body>-->
+<!--</html>-->
