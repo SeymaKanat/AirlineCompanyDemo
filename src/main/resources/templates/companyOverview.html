@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <head th:replace="fragments/general :: baseHeader(~{:: title})">
@@ -36,14 +36,14 @@
             <th>Employees</th>
             <th>Location</th>
             <th>Available Flights</th>
-            <th>Flight</th>
+            <th  sec:authorize="isAuthenticated()">Flight</th>
         </tr>
         <tr th:each="company : ${allCompanies}">
             <td> <a th:href="@{/company/detail/{companyName}(companyName=${company.companyName})}" th:text="${company.companyName}"></a></td>
             <td th:text="${company.allEmployeesDisplayString}"></td>
             <td th:text="${company.location}"></td>
             <td th:text="${company.numberOfAvailableAirplanes}"></td>
-            <td><a th:href="@{/airplane/new/{companyId}(companyId=${company.companyId})}">Flights of airplane</a></td>
+            <td  sec:authorize="isAuthenticated()"><a th:href="@{/airplane/new/{companyId}(companyId=${company.companyId})}">Flights of airplane</a></td>
         </tr>
     </table>
 

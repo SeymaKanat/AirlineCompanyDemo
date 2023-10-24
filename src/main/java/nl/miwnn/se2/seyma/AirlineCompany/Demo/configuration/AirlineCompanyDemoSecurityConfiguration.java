@@ -30,7 +30,7 @@ public class AirlineCompanyDemoSecurityConfiguration {
                         .antMatchers("/", "/book/overview").permitAll()
                         .anyRequest().authenticated())
                 .formLogin().and()
-                .logout().logoutSuccessUrl("/book/overview");
+                .logout().logoutSuccessUrl("/company/overview");
         return httpSecurity.build();
     }
 
