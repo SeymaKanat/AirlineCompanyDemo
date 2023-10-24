@@ -16,10 +16,14 @@ import java.util.Set;
 @Getter @Setter
 public class Company {
     public Company(String companyName) {
+        this();
         this.companyName = companyName;
     }
 
     public Company() {
+        employees = new HashSet<>();
+        airplanes = new HashSet<>();
+
 
     }
 
@@ -32,7 +36,7 @@ public class Company {
     private String location;
 
     @ManyToMany
-    private Set<Employee> employees = new HashSet<>();
+    private Set<Employee> employees;
 
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL) //company silinirse airplane de silinir.
