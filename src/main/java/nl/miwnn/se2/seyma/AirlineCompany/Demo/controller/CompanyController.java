@@ -24,9 +24,8 @@ import java.util.Optional;
 public class CompanyController {
 
 
-    private  final EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
     private final CompanyRepository companyRepository;
-
 
 
     @GetMapping({"/", "/company/overview"})
@@ -36,6 +35,7 @@ public class CompanyController {
         return "companyOverview";
 
     }
+
     @GetMapping("/company/new") //Burasi company olusturmak icin
     private String showCompanyForm(Model model) {
         model.addAttribute("company", new Company());
@@ -46,19 +46,20 @@ public class CompanyController {
 
 
     @PostMapping("/company/new") //Save company butonu icin
-    private String saveOrUpdateCompany(@ModelAttribute("company") Company companyToBeSaved, BindingResult result){
-        if (!result.hasErrors()){
+    private String saveOrUpdateCompany(@ModelAttribute("company") Company companyToBeSaved, BindingResult result) {
+        if (!result.hasErrors()) {
             companyRepository.save(companyToBeSaved);
         }
         return "redirect:/";
     }
 
+
     @GetMapping("/company/edit/{companyName}")
-    private String showEditCompantyForm(@PathVariable("companyName") String companyName, Model model){
+    private String showEditCompanyForm(@PathVariable("companyName") String companyName, Model model) {
         Optional<Company> optionalCompany = companyRepository.findCompanyByCompanyName(companyName);
 
 
-        if (optionalCompany.isEmpty()){
+        if (optionalCompany.isEmpty()) {
             return "redirect:/";
         }
         model.addAttribute("company", optionalCompany.get());
@@ -67,19 +68,33 @@ public class CompanyController {
 
     }
 
+
     @GetMapping("/company/detail/{companyName}")
-    private String showCompanyDetail(@PathVariable("companyName") String companyName, Model model){
-       Optional<Company> optionalCompany = companyRepository.findCompanyByCompanyName(companyName);
+    private String showCompanyDetail(@PathVariable("companyName") String companyName, Model model) {
+        Optional<Company> optionalCompany = companyRepository.findCompanyByCompanyName(companyName);
 
-       if(optionalCompany.isEmpty()){
-           return "redirect:/";
-       }
-       model.addAttribute("companyToBeShown", optionalCompany.get());
+        if (optionalCompany.isEmpty()) {
+            return "redirect:/";
+        }
+        model.addAttribute("companyToBeShown", optionalCompany.get());
 
-       return "companyDetail";
+        return "companyDetail";
     }
 
+    @GetMapping("/company/delete/{companyName}")
+    private String deleteCompany(@PathVariable("companyName") String companyName) {
+        {
+            Optional<Company> optionalCompany = companyRepository.findCompanyByCompanyName(companyName);
+
+            if (optionalCompany.isEmpty()) {
+                return "redirect:/book/overview";
+            }
+
+            companyRepository.delete(optionalCompany.get());
+
+            return "redirect:/company/overview";
+        }
 
 
-
+    }
 }

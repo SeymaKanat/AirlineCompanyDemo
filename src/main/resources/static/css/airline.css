@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400&family=Poppins:wght@200;400;500;600;700&family=Roboto:wght@300;400;500&family=Tilt+Neon&display=swap');
+
+/*RESET CODE*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Dosis', sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
+:root{
+    --bg-color : #000000;
+    --text-color : #ff0088;
+    --main-color : rgb(255, 255, 255);
+}
+body{
+    min-height: 100vh;
+    background: var(--bg-color);
+    color:#ffffff;
+}
+header{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    padding: 28px 12%;
+    transition: all 0.5s ease;
+
+}
+.logo{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.logo i{
+    color: var(--text-color);
+    font-size: 28px;
+    margin-right: 3px;
+    text-decoration: none;
+}
+.logo i:hover{
+    color: #37ff00;
+    transition: all 0.4s ease;
+    text-decoration: none;
+}
+.logo span{
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color);
+    transition: all 0.4s ease;
+    text-decoration: none;
+}
+.logo span:hover{
+    color:#37ff00;
+}
+.navbar{
+    display: flex;
+
+}
+.navbar a{
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 5px 0;
+    margin: 0 30px;
+    transition: all 0.4s ease;
+    text-decoration: none;
+
+}
+.navbar a:hover{
+    color: #37ff00;
+}
+/*.navbar a.active{*/
+/*    color: #37ff00;*/
+/*}*/
+.login{
+    display: flex;
+    align-items: center;
+}
+.login a{
+    margin-right: 25px;
+    margin-left: 10px;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.50s ease;
+    text-decoration: none;
+}
+
+.login a:hover{
+    color: #37ff00;
+}
+.login a.active{
+    color: #37ff00;
+}
+.user{
+    display: flex;
+    align-items: center;
+}
+.user i{
+    color: var(--text-color);
+    font-size: 28px;
+    margin-right: 7px;
+}
+.user i:hover{
+    color: #37ff00;
+}
+
+#menu-icon{
+    font-size: 28px;
+    color: var(--text-color);
+    cursor: pointer;
+    z-index: 10000;
+    display: none;
+
+}
+
+@media (max-width: 1280px) {
+    header{
+        padding: 14px 2%;
+        transition: .2s;
+    }
+    .navbar a{
+        padding: 5px 0;
+        margin: 0 20px;
+
+
+    }
+
+}
+
+@media (max-width: 1090px) {
+    #menu-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        right: 2%;
+        width: 270px;
+        height: 29vh;
+        background: #37ff00;
+        display: flex;
+        flex-direction: column;
+        /*justify-content: flex-start;*/
+        border-radius: 10px;
+        transition: all .50s ease;
+    }
+    .navbar a{
+        display: block;
+        margin: 12px 0;
+        padding: 0 25px;
+        transition: all .50s ease;
+    }
+    .navbar a:hover{
+        color: #37ff00;
+        transform: translateY(5px);
+    }
+    .navbar a.active{
+        color: var(--text-color);
+    }
+    .navbar.open{
+        right: 2%;
+
+    }
+
+}
+/*NAVBAR FINISHED*/
+
+/* Sayfa içeriğini ortala */
+.container {
+    text-align: center;
+    margin: 40px auto;
+    padding-top: 30px; /* Sayfayı aşağı kaydırmak için üst boşluk ekleyin */
+    max-width: 80%; /* Tablonun genişliğini isteğinize göre ayarlayabilirsiniz */
+
+}
+
+/* Sayfayı ortala */
+.container {
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+    justify-content: space-between;
+    height: 80vh;
+
+}
+.container p {
+    text-align: right;
+    margin: 0;
+}
+
+
+/* Başlıkı ortala */
+.h1 {
+    text-align: left; /* Metnini sola hizala */
+
+}
+
+/* Tabloyu ortala */
+.table {
+    margin: 0 auto;
+    padding-top: 20px; /* Tabloyu aşağı kaydırmak için üst boşluk ekleyin */
+    color: #ffffff;
+    text-align: left; /* Metnini sola hizala */
+    width: 100%; /* Tablonun genişliğini isteğinize göre ayarlayabilirsiniz */
+    font-size: 15px; /* Metin boyutunu ayarlar */
+
+}
+
+ /*Ekleme bağlantısını ortala ve aşağı kaydır */
+a[href*="/company/new"] {
+    display: block;
+    text-align: center;
+    padding-top: 20px; /* Bağlantıyı aşağı kaydırmak için üst boşluk ekleyin */
+}
+
+/*CSS kodu düğmeyi tablonun sol altına taşıyor */
+form {
+    position: relative;
+    text-align: left; /* Düğmenin metnini sola hizala */
+}
+
+button[type="submit"] {
+    background-color: pink; /* Pembe arka plan rengi */
+    color: white; /* Beyaz metin rengi */
+    padding: 10px 20px; /* Düğme içeriği boşlukları */
+    border: none; /* Kenar çizgisi olmadan */
+    border-radius: 10px;
+    cursor: pointer; /* El işareti göstererek tıklanabilirlik */
+    display: block;
+    margin-top: 10px; /* Tabloya olan boşluğu ayarlamak için */
+}
+
+.header_companyDetailPage {
+    margin-top: 20px; /* İstenilen boşluğu ayarlayın */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons_editDelete {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin: 0;
+}
+
+.buttons_editDelete li {
+    margin-left: 10px; /* Düğmeler arasındaki boşluğu ayarlayabilirsiniz */
+}
+
+.header_companyDetailPage, .table {
+    margin-top: 80px; /* Sayfayı 20 piksel aşağı kaydırır */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,52 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <head th:replace="fragments/general :: baseHeader(~{:: title})">
+        <link rel="Flightopia" type="png" href="/templates/fragments/img/plane-icon.png">
+
         <title>Overview of all companies</title>
     </head>
+
+    <title></title>
 <body>
 
-<!--<h1>Overview of all companies</h1>-->
+
 <div th:replace="fragments/general :: navbar"></div>
-
-<!--<table>-->
-<!--    <tr>-->
-<!--        <th>Company Name</th>-->
-<!--        <th>Employees</th>-->
-<!--        <th>Available Flights</th>-->
-<!--        <th>Flight</th>-->
-<!--    </tr>-->
-
-<!--    <tr th:each="company : ${allCompanies}">-->
-<!--        <td> <a th:href="@{/company/detail/{companyName}(companyName=${company.companyName})}" th:text="${company.companyName}"></a></td>-->
-<!--        <td th:text="${company.allEmployeesDisplayString}"></td>-->
-<!--        <td th:text="${company.location}"></td>-->
-<!--        <td th:text="${company.numberOfAvailableAirplanes}"></td>-->
-<!--        <td><a th:href="@{/airplane/new/{companyId}(companyId=${company.companyId})}">Flights of airplane</a></td>-->
-<!--    </tr>-->
-<!--</table>-->
 <div class="container">
-    <h1>Overview of all companies</h1>
-
-<!--    <a th:href="@{/company/new}">Add a Company</a>-->
-    <table>
+    <h1 style="text-align:left">Companies</h1>
+    <table class="table">
+        <thead>
         <tr>
+            <th scope="col">#</th>
             <th>Company Name</th>
             <th>Employees</th>
             <th>Location</th>
             <th>Available Flights</th>
-            <th  sec:authorize="isAuthenticated()">Flight</th>
+            <th sec:authorize="isAuthenticated()">Flight</th>
+
         </tr>
+        </thead>
+        <tbody>
         <tr th:each="company : ${allCompanies}">
+            <th scope="row" th:text="${company.companyId}"></th>
             <td> <a th:href="@{/company/detail/{companyName}(companyName=${company.companyName})}" th:text="${company.companyName}"></a></td>
             <td th:text="${company.allEmployeesDisplayString}"></td>
             <td th:text="${company.location}"></td>
             <td th:text="${company.numberOfAvailableAirplanes}"></td>
-            <td  sec:authorize="isAuthenticated()"><a th:href="@{/airplane/new/{companyId}(companyId=${company.companyId})}">Flights of airplane</a></td>
+            <td sec:authorize="isAuthenticated()"><a th:href="@{/airplane/new/{companyId}(companyId=${company.companyId})}">Flights of airplane</a></td>
         </tr>
+        </tbody>
     </table>
 
-    <a th:href="@{/company/new}">Add a Company</a>
+
+        <form th:action="@{/company/new}" method="get">
+            <<button type="submit">Add a Company</button>
+        </form>
+<!--    <div th:if="${duplicateEntryError}">-->
+<!--        <p style="color: red;">Bu isim zaten kullanılıyor, lütfen farklı bir isim deneyin.</p>-->
+<!--    </div>-->
+<!--    Bu error mesajiydi ama olmadi-->
+
+
+
+
+    <!--    <table>-->
+<!--        <tr>-->
+<!--            <th>Company Name</th>-->
+<!--            <th>Employees</th>-->
+<!--            <th>Location</th>-->
+<!--            <th>Available Flights</th>-->
+<!--            <th sec:authorize="isAuthenticated()">Flight</th>-->
+<!--        </tr>-->
+<!--        <tr th:each="company : ${allCompanies}">-->
+<!--            <td> <a th:href="@{/company/detail/{companyName}(companyName=${company.companyName})}" th:text="${company.companyName}"></a></td>-->
+<!--            <td th:text="${company.allEmployeesDisplayString}"></td>-->
+<!--            <td th:text="${company.location}"></td>-->
+<!--            <td th:text="${company.numberOfAvailableAirplanes}"></td>-->
+<!--            <td sec:authorize="isAuthenticated()"><a th:href="@{/airplane/new/{companyId}(companyId=${company.companyId})}">Flights of airplane</a></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+
+<!--    <a th:href="@{/company/new}">Add a Company</a>-->
 </div>
+
+
+
 
 <div th:replace="fragments/general :: footer"></div>
 <div th:replace="fragments/general :: bottomScripts"></div>

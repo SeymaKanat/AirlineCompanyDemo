@@ -1,42 +1,80 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <head th:replace="fragments/general :: baseHeader(~{:: title})">
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+        <link rel="stylesheet" type="text/css" href="/css/airline.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css "/>
+    </head>
     <title>Create a new company</title>
 </head>
 <body>
+<div th:replace="fragments/general :: navbar"></div>
 
-<h1>Create a new company</h1>
+    <div class="container  row-cols-lg-2">
+        <h1 style="margin-top: 10px">Create a new company</h1>
+        <div class="row">
+            <div class="col-md">
+                <div class="form-floating">
+                    <form th:action="@{/company/new}" method="post" th:object="${company}">
+                        <input type="hidden" th:field="*{companyId}">
+                        <div class="mb-3">
+                            <label for="companyNameField" class="form-label">Company Name:</label>
+                            <input type="text" id="companyNameField" th:field="*{companyName}" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="locationField" class="form-label">Location:</label>
+                            <input type="text" id="locationField" th:field="*{location}" class="form-control">
+                        </div>
+                        <div class="mb-3" >
+                            <label for="employeeField" class="form-label">Employees:</label>
+                            <select id="employeeField" th:field="*{employees}" multiple class="form-select">
+                                <option th:each="employee : ${allEmployees}"
+                                        th:value="${employee.employeeId}"
+                                        th:text="${employee.displayName}">
+                                </option>
+                            </select>
+                        </div>
+                        <input type="submit" value="Save" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<form th:action="@{/company/new}" method="post" th:object="${company}" >
-    <input type="hidden" th:field="*{companyId}">
+<!--<form th:action="@{/company/new}" method="post" th:object="${company}" >-->
+<!--    <input type="hidden" th:field="*{companyId}">-->
 
-    <table>
-        <tr>
-            <td><label for="companyNameField">Company Name</label></td>
-            <td><label for="locationField"> Location </label></td>
-            <td><label for="employeeField"> Employees </label></td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" id="companyNameField" th:field="*{companyName}" />
-            </td>
-            <td>
-                <input type="text" id="locationField" th:field="*{location}" />
-            </td>
-            <td>
-                <select id="employeeField" th:field="*{employees}" multiple >
-                    <option th:each="employee : ${allEmployees}"
-                            th:value="${employee.employeeId}"
-                            th:text="${employee.displayName}">
-                    </option>
-                </select>
-            </td>
-        </tr>
-    </table>
+<!--    <table class="table">-->
+<!--        <tr>-->
+<!--            <td><label for="companyNameField">Company Name</label></td>-->
+<!--            <td><label for="locationField"> Location </label></td>-->
+<!--            <td><label for="employeeField"> Employees </label></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <input type="text" id="companyNameField" th:field="*{companyName}" />-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <input type="text" id="locationField" th:field="*{location}" />-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <select id="employeeField" th:field="*{employees}" multiple >-->
+<!--                    <option th:each="employee : ${allEmployees}"-->
+<!--                            th:value="${employee.employeeId}"-->
+<!--                            th:text="${employee.displayName}">-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
 
-    <input type="submit" value="Save Company">
-</form>
+<!--    <input type="submit" value="Save Company">-->
+<!--</form>-->
+
+
 
 </body>
 </html>

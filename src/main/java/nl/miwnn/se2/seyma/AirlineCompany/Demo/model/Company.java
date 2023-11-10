@@ -34,6 +34,7 @@ public class Company {
     private String companyName;
 
     private String location;
+    private int numberOfRow;
 
     @ManyToMany
     private Set<Employee> employees;
@@ -66,5 +67,7 @@ public class Company {
 
         return stringBuilder.toString();
     }
+
+
 
 }

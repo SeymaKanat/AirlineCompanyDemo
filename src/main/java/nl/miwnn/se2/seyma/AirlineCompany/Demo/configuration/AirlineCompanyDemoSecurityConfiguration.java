@@ -27,7 +27,7 @@ public class AirlineCompanyDemoSecurityConfiguration {
         httpSecurity.authorizeHttpRequests((authorize) -> authorize
                         .antMatchers("/css/**", "/webjars/**").permitAll()
                         .antMatchers("/initialize").permitAll()
-                        .antMatchers("/", "/book/overview").permitAll()
+                        .antMatchers("/", "/company/overview").permitAll()
                         .anyRequest().authenticated())
                 .formLogin().and()
                 .logout().logoutSuccessUrl("/company/overview");
